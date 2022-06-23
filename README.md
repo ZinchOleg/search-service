@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Query String Filter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The App implements filters based on the query parameter. It simulates an ajax call on page load to fetch some data using the Promise API.
 
-## Available Scripts
+## Run application
 
-In the project directory, you can run:
+1. Open a new bash shell
+2. `cd query-string-filter`
+3. `npm install` or `yarn install`
+4. `npm run start` or `yarn start`
 
-### `npm start`
+#### Query parameters
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- q = search term (eg. ?q=foo)
+- co = company filter (eg. ?q=foo&co=facebook,linkedin,google )
+- pos = position filter (eg. ?q=foo&co=facebook&pos=software+engineer,data+scientist)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Example JSON Response
 
-### `npm test`
+```json
+[{
+  title: “a hard interview question”,
+  tags: [“sql”, “probability”, “modeling”],
+  companies: [“facebook”, “linkedin”, “netflix”],
+  positions: [“software engineer”, “Business Analyst”, “Data Scientist”]
+},
+{
+  title: “easy question to solve”,
+  tags: [“sql”, “probability”, “statistics”],
+  companies: [“facebook”, “linkedin”, “amazon”, “google”],
+  positions: [“software engineer”, “marketing Analyst”, “Data Scientist”, “ML Engineer”]
+}]
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
 
-### `npm run build`
+## Expected behavior
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| url                                       |                                                                      output                                                                      |
+| ----------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------: |
+| /                                         |                                                             Show all question titles                                                             |
+| /?q=foo                                   |                                      Show only question titles containing “foo” as a substring in the title                                      |
+| ?q=foo&co=facebook                        |                          Show only questions containing “foo” in the title and where the company list includes facebook                          |
+| ?q=foo&pos=software+engineer              |                     Show only questions containing “foo” in the title and where positions list includes “software engineer”                      |
+| ?q=foo&&co=facebook&pos=software+engineer | Show only questions containing “foo” in the title and where positions list includes “software engineer” and the company list includes “facebook” |
